@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -7,17 +7,21 @@ exports.Dropdown = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
-var _dropdown = require('./dropdown.js');
+var _dropdown = require("./dropdown.js");
 
 var _dropdown2 = _interopRequireDefault(_dropdown);
 
-var _selectPanel = require('./select-panel.js');
+var _selectPanel = require("./select-panel.js");
 
 var _selectPanel2 = _interopRequireDefault(_selectPanel);
+
+var _getString = require("./get-string.js");
+
+var _getString2 = _interopRequireDefault(_getString);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72,7 +76,7 @@ var MultiSelect = function (_Component) {
     }
 
     _createClass(MultiSelect, [{
-        key: 'getSelectedText',
+        key: "getSelectedText",
         value: function getSelectedText() {
             var _props = this.props,
                 options = _props.options,
@@ -92,12 +96,13 @@ var MultiSelect = function (_Component) {
             return selectedLabels.join(", ");
         }
     }, {
-        key: 'renderHeader',
+        key: "renderHeader",
         value: function renderHeader() {
             var _props2 = this.props,
                 options = _props2.options,
                 selected = _props2.selected,
-                valueRenderer = _props2.valueRenderer;
+                valueRenderer = _props2.valueRenderer,
+                overrideStrings = _props2.overrideStrings;
 
 
             var noneSelected = selected.length === 0;
@@ -107,28 +112,28 @@ var MultiSelect = function (_Component) {
 
             if (noneSelected) {
                 return _react2.default.createElement(
-                    'span',
+                    "span",
                     { style: styles.noneSelected },
-                    customText || "Select some items..."
+                    customText || (0, _getString2.default)("selectSomeItems", overrideStrings)
                 );
             }
 
             if (customText) {
                 return _react2.default.createElement(
-                    'span',
+                    "span",
                     null,
                     customText
                 );
             }
 
             return _react2.default.createElement(
-                'span',
+                "span",
                 null,
-                allSelected ? "All items are selected" : this.getSelectedText()
+                allSelected ? (0, _getString2.default)("allItemsAreSelected", overrideStrings) : this.getSelectedText()
             );
         }
     }, {
-        key: 'render',
+        key: "render",
         value: function render() {
             var _props3 = this.props,
                 ItemRenderer = _props3.ItemRenderer,
@@ -140,15 +145,18 @@ var MultiSelect = function (_Component) {
                 disableSearch = _props3.disableSearch,
                 filterOptions = _props3.filterOptions,
                 shouldToggleOnHover = _props3.shouldToggleOnHover,
-                hasSelectAll = _props3.hasSelectAll;
+                hasSelectAll = _props3.hasSelectAll,
+                overrideStrings = _props3.overrideStrings,
+                id = _props3.id;
 
 
             return _react2.default.createElement(
-                'div',
-                { className: 'multi-select' },
+                "div",
+                { className: "multi-select" },
                 _react2.default.createElement(
                     _dropdown2.default,
                     {
+                        id: id,
                         isLoading: isLoading,
                         contentComponent: _selectPanel2.default,
                         shouldToggleOnHover: shouldToggleOnHover,
@@ -161,7 +169,8 @@ var MultiSelect = function (_Component) {
                             onSelectedChanged: this.handleSelectedChanged,
                             disabled: disabled,
                             disableSearch: disableSearch,
-                            filterOptions: filterOptions
+                            filterOptions: filterOptions,
+                            overrideStrings: overrideStrings
                         },
                         disabled: disabled
                     },
