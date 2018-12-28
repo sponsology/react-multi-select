@@ -119,7 +119,7 @@ class MultiSelect extends Component<Props> {
         } = this.props;
 
         return (
-            <div className="multi-select">
+            <div className="multi-select" id={id+"multi"}>
                 <Dropdown
                     id={id}
                     isLoading={isLoading}

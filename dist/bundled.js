@@ -1102,7 +1102,7 @@ var MultiSelect = function (_Component) {
 
             return _react2.default.createElement(
                 "div",
-                { className: "multi-select" },
+                { className: "multi-select", id: id + "multi" },
                 _react2.default.createElement(
                     _dropdown2.default,
                     {
